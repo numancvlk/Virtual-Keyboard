@@ -1,4 +1,3 @@
-#LIBRARIES
 import cv2
 import mediapipe as mp
 import math
@@ -35,6 +34,7 @@ keys_letters = [
     ["Z", "X", "C", "V", "B", "N", "M"]
 ]
 
+# --- DİNAMİK KONUMLANDIRMA ve TUŞ OLUŞTURMA ---
 keyboard_width = len(keys_letters[0]) * (KEY_WIDTH + GAP) - GAP
 keyboard_height = len(keys_letters) * (KEY_HEIGHT + GAP) - GAP
 
@@ -52,6 +52,7 @@ for i in range(len(keys_letters)):
             "action": key
         })
 
+# Sil (Backspace) tuşu
 last_row_width = len(keys_letters[-1]) * (KEY_WIDTH + GAP) - GAP
 x_pos_del = start_x + last_row_width + 40
 y_pos_del = start_y + 2 * (KEY_HEIGHT + GAP) 
@@ -82,6 +83,7 @@ def main():
         for bt in buttonList:
             bt["obj"].draw(imgNew)
 
+        # El algılandıysa
         if results.multi_hand_landmarks:
             for handLms in results.multi_hand_landmarks:
                 lmList = []
@@ -131,7 +133,7 @@ def main():
         cv2.addWeighted(imgNew, 0.5, img, 0.5, 0, img)
 
         cv2.imshow("VIRTUAL KEYBOARD", img)
-        if cv2.waitKey(1):
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()

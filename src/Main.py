@@ -130,8 +130,8 @@ def main():
 
         cv2.addWeighted(imgNew, 0.5, img, 0.5, 0, img)
 
-        cv2.imshow("AirType CV - Sanal Klavye", img)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        cv2.imshow("VIRTUAL KEYBOARD", img)
+        if cv2.waitKey(1):
             break
 
     cap.release()
